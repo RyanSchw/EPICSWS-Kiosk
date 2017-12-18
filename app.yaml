@@ -1,0 +1,29 @@
+
+runtime: python27
+threadsafe: yes
+api_version: 1
+
+handlers:
+
+- url: /assets/app.manifest
+  static_files: assets/app.manifest
+  mime_type: text/cache-manifest
+  upload: assets/app.manifest
+  expiration: '0'
+
+- url: /assets
+  static_dir: assets
+  expiration: '30d'
+
+- url: /lib
+  static_dir: lib
+  expiration: '30d'
+
+- url: /
+  script: main.application
+  secure: always
+  redirect_http_response_code: 301
+
+- url: .*
+  script: main.application
+  login: admin
