@@ -1,0 +1,51 @@
+.ws-top-card {
+    height: 300px;
+}
+
+.ws-middle-card {
+    height: 290px;
+}
+
+.ws-bottom-card {
+    height:350px;
+}
+
+.ws-city-card {
+    height: 232px;
+}
+
+/* TODO: Update formatting to correctly fit title box */
+div.ws-title {
+    height: 60px;
+}
+
+span.ws-title {
+    float: left;
+    padding: 15px 0 0 15px;
+}
+
+p.ws-title {
+    font-family: 'Roboto', serif;
+    font-size: 32px;
+    float: left;
+    margin: auto;
+    padding: 5px;
+    height: 50px;
+}
+
+.ws-large-text {
+    font-size: 120px;
+}
+
+.ws-sub-text {
+    font-size: 24px;
+}
+
+.ws-city-caption {
+    font-size: 24px;
+    text-align: right;
+}
+
+.ws-city-breaker {
+    height: 30px;
+}

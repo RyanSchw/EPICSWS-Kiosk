@@ -1,33 +1,146 @@
 <!-- Red: rgb(190, 15, 15); Blue: rgb(30, 100, 240); Green: rgb(15, 157, 88) -->
 
 <!DOCTYPE html>
-<!--<html manifest="/assets/app.manifest">-->
 <html lang="en">
 <head>
 
     <title>{{title}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" type="text/css" href="/assets/stylesheet.css">
-    <script src="/lib/jquery/jquery-3.1.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/lib/mdl-font/roboto-setup.css">
+    <!-- Import style sheet and custom card css files -->
+    <link rel="stylesheet" type="text/css" href="/assets/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="assets/ws-card.css" />
 
-    <!--Needs to be removed for application caching-->
-    <link rel="stylesheet" href="/lib/mdl/material.light_blue-red.min.css">
-    <link rel="stylesheet" href="/lib/mdl/material.icons.css">
-    <script src="/lib/mdl/material.min.js"></script>
+    <!-- Chart.js -->
+    <!-- TODO: Any down side to importing from cloudflare? -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+
+    <!-- Import jQuery and Roboto Font -->
+    <script src="/lib/jquery/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/lib/mdl-font/roboto-setup.css" />
+
+    <!-- Import UIKit Set -->
+    <link rel="stylesheet" type="text/css" href="lib/UIkit/css/uikit.min.css" />
+    <script src="lib/UIkit/js/uikit.min.js"></script>
+    <script src="lib/UIkit/js/uikit-icons.min.js"></script>
 
 </head>
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-shadow--4-px">
+<body>
+    <div class="uk-grid-divider" uk-grid style="padding:30px;">
+        <!-- City menu -->
+        <div class="cityContainer uk-width-1-5">
+            <!-- First card -->
+            <div class="ws-city-card">
+                <!-- Top section (Image) -->
+                <div>
+                    <img src="assets/img/Lafayette.jpg" alt="Missing Image">
+                </div>
+                <!-- Bottom section (caption) -->
+                <div>
+                    <p class="ws-city-caption">Lafayette, IN</p>
+                </div>
+            </div>
 
-</div>
+            <div class="ws-city-breaker"></div>
 
+            <!-- Second card -->
+            <div class="ws-city-card">
+                <!-- Top section (Image) -->
+                <div>
+                    <img src="assets/img/Sacramento.jpg" alt="Missing Image">
+                </div>
+                <!-- Bottom section (caption) -->
+                <div>
+                    <p class="ws-city-caption">Sacramento, CA</p>
+                </div>
+            </div>
 
+            <div class="ws-city-breaker"></div>
 
-<script>
-    {% include "main.js" %}
-</script>
+            <!-- Third card -->
+            <div class="ws-city-card">
+                <!-- Top section (Image) -->
+                <div>
+                    <img src="assets/img/Tampa.jpg" alt="Missing Image">
+                </div>
+                <!-- Bottom section (caption) -->
+                <div>
+                    <p class="ws-city-caption">Tampa, FL</p>
+                </div>
+            </div>
+
+            <div class="ws-city-breaker"></div>
+
+            <!-- Fourth card -->
+            <div class="ws-city-card">
+                <!-- Top section (Image) -->
+                <div>
+                    <img src="assets/img/Washington.jpg" alt="Missing Image">
+                </div>
+                <!-- Bottom section (caption) -->
+                <div>
+                    <p class="ws-city-caption">Washington, D.C.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Detailed section of website -->
+        <div class="detailContainer uk-width-4-5">
+            <!-- Start top row -->
+            <div class="uk-text-center" uk-grid>
+                <!-- Start first card -->
+                <div class="uk-width-1-3">
+                    <div class="ws-top-card">
+                        <!-- Title div -->
+                        <div class="ws-title">
+                            <span uk-icon="icon: bookmark" class="ws-title"></span>
+                            <p class="ws-title" style="padding-left:5px">Current Temperature</p>
+                        </div>
+                        <p class="ws-large-text" id="current_temp">30°C</p>
+                        <p class="ws-sub-text" id="temp_change">5% increase from previous day</p>
+                    </div>
+                </div>
+                <!-- Start second card -->
+                <div class="uk-width-2-3">
+                    <div class="ws-top-card">
+                        <canvas id="tempChart" width="900" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+            <!-- End top row -->
+            <!-- Start middle row -->
+            <div class="uk-text-center ws-middle-card" uk-grid>
+                <div class="uk-width-expand">
+                    <div class="">
+                        <input id="day1" value="20171220"/>
+                        <button onclick="pullData()">PULL DATA</button>
+                    </div>
+                </div>
+            </div>
+            <!-- End middle row -->
+            <!-- Start bottom row -->
+            <div class="uk-text-center ws-bottom-card" uk-grid>
+                <div class="uk-width-1-4">
+                    <div class="uk-card uk-card-default uk-card-body">1-4</div>
+                </div>
+                <div class="uk-width-1-4">
+                    <div class="uk-card uk-card-default uk-card-body">1-4</div>
+                </div>
+                <div class="uk-width-1-4">
+                    <div class="uk-card uk-card-default uk-card-body">1-4</div>
+                </div>
+                <div class="uk-width-1-4">
+                    <div class="uk-card uk-card-default uk-card-body">1-4</div>
+                </div>
+            </div>
+            <!-- End bottom row -->
+        </div>
+    </div>
+
+    <script>
+        {% include "main.js" %}
+        {% include "charts.js" %}
+    </script>
 
 </body>
 </html>

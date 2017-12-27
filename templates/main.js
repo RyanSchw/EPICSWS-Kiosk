@@ -14,28 +14,59 @@ window.addEventListener('load', function(e) {
 
 // Variable declarations
 var API_KEY = ""
+var API_CALLS = 0
+var temperature_values = [];
 
 // Email formatted data
 
 // Pull data from weather underground
-func pullData() {
+// @param Date: Formatted as YYYYMMDD
+function pullData() {
+    console.log(document.getElementById('day1').value);
+    day = document.getElementById('day1').value;
     jQuery(document).ready(function($) {
         $.ajax({
-        url : "http://api.wunderground.com/api/" + API_KEY + "/geolookup/conditions/q/CA/San_Francisco.json",
-        dataType : "jsonp",
-        success : function(parsed_json) {
-          var location = parsed_json['current_observation']['display_location']['full'];
-          var measurements = parsed_json['current_observation'];
-          var weather = measurements['weather']; // String, Overview of weather
-          var temp_f = measurements['temp_f']; // Integer, Measured temperature in degrees F
-          var humidity = measurements['relative_humidity']; // String, xx%, Relative humidity (%)
-          var wind_dir = measurements['wind_dir']; // String, Wind direction (South, North, etc.)
-          var wind_degrees = measurements['wind_degrees']; // Integer, Wind direction (0 degrees is North)
-          var wind_mph = measurements['wind_mph']; // Integer, Wind speed in miles per hour
-          var pressure_in = measurements['pressure_in']; // String, Barometric pressure in inch pounds?
-
-
-        }
+            url : "http://api.wunderground.com/api/" + API_KEY + "/history_" + day + "/q/CA/San_Francisco.json",
+            dataType : "jsonp",
+            async: false,
+            success : function(parsed_json) {
+                API_CALLS++;
+                console.log(parsed_json);
+                graphChart(formatTemperature(parsed_json));
+            }
         });
     });
 }
+
+// @param Parsed JSON
+// @return Array of temperature values
+function formatTemperature(json) {
+    var tempList = [];
+    var observationList = json['history']['observations'];
+    for (i = 0; i < observationList.length; i++) {
+        var t = observationList[i]['tempi'];
+        tempList[i] = parseFloat(t);
+    }
+    return tempList;
+}
+
+// TODO: FIX FUNCTIONS
+// function validReturn(parsed_json) {
+//     if parsed_json['response'] != null {
+//         if parsed_json['error'] != null {
+//             if parsed_json['type'] != null {
+//                 if parsed_json['type'] == "keynotfound" {
+//                     // KEY NOT FOUND
+//                     jserror("JSON Error: keynotfound");
+//                     return;
+//                 }
+//             }
+//             jserror("JSON Error");
+//         }
+//     }
+// }
+//
+// function jserror(errormsg) {
+//     // TODO: Console.log errors with error messages
+//     console.error(errormsg);
+// }

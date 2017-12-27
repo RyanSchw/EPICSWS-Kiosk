@@ -18,3 +18,21 @@ img {
 .center-text {
     text-align: center;
 }
+
+.cityContainer {
+    float: left;
+    height: 100%;
+}
+
+.detailContainer {
+    float: right;
+}
+
+.spacing {
+    margin: 40px;
+    padding: 0px;
+}
+
+.grid-spacing {
+    padding-left: 40px !important;
+}
