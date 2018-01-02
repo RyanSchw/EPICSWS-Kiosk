@@ -43,6 +43,7 @@ function pullData() {
 function formatTemperature(json) {
     var tempList = [];
     var observationList = json['history']['observations'];
+    // TODO: Increase funcitionality to check if hours are continuous, otherwise don't include a data point for that time (or average previous/future values?)
     for (i = 0; i < observationList.length; i++) {
         var t = observationList[i]['tempi'];
         tempList[i] = parseFloat(t);

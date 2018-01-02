@@ -96,8 +96,10 @@
                             <span uk-icon="icon: bookmark" class="ws-title"></span>
                             <p class="ws-title" style="padding-left:5px">Current Temperature</p>
                         </div>
-                        <p class="ws-large-text" id="current_temp">30°C</p>
-                        <p class="ws-sub-text" id="temp_change">5% increase from previous day</p>
+
+                        <!-- TODO: Necessary for elements to have id tags? -->
+                        <p class="ws-large-text" id="current_temp">{{current_temperature}}</p>
+                        <p class="ws-sub-text" id="temp_change">{{temperature_change}}</p>
                     </div>
                 </div>
                 <!-- Start second card -->
