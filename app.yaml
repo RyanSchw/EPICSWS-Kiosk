@@ -5,6 +5,10 @@ api_version: 1
 
 handlers:
 
+- url: /favicon\.ico
+  static_files: assets/img/favicon.ico
+  upload: assets/img/favicon\.ico
+
 - url: /assets/app.manifest
   static_files: assets/app.manifest
   mime_type: text/cache-manifest
@@ -19,11 +23,19 @@ handlers:
   static_dir: lib
   expiration: '30d'
 
+- url: /request/submitws
+  script: main.application
+
 - url: /
   script: main.application
   secure: always
   redirect_http_response_code: 301
+  # login: admin
 
 - url: .*
   script: main.application
-  login: admin
+  # login: admin
+
+# - url: /cron/job
+#   script: reports.app
+#   login: admin (prevents people from getting to page)

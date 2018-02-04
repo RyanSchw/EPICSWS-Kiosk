@@ -4,25 +4,28 @@
 <html lang="en">
 <head>
 
-    <title>{{title}}</title>
+    <title>EPICS Weather Station</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- Import style sheet and custom card css files -->
     <link rel="stylesheet" type="text/css" href="/assets/stylesheet.css" />
-    <link rel="stylesheet" type="text/css" href="assets/ws-card.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/ws-card.css" />
 
     <!-- Chart.js -->
-    <!-- TODO: Any down side to importing from cloudflare? -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+
+    <!-- TODO: Look into usage of jQuery UI (has effects and more) -->
 
     <!-- Import jQuery and Roboto Font -->
-    <script src="/lib/jquery/jquery-3.1.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/lib/mdl-font/roboto-setup.css" />
+    <!-- JQuery CDN provided by https://developers.google.com/speed/libraries/#jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
     <!-- Import UIKit Set -->
-    <link rel="stylesheet" type="text/css" href="lib/UIkit/css/uikit.min.css" />
-    <script src="lib/UIkit/js/uikit.min.js"></script>
-    <script src="lib/UIkit/js/uikit-icons.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/css/uikit.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.35/js/uikit-icons.min.js"></script>
 
 </head>
 
@@ -33,12 +36,19 @@
             <!-- First card -->
             <div class="ws-city-card">
                 <!-- Top section (Image) -->
-                <div>
-                    <img src="assets/img/Lafayette.jpg" alt="Missing Image">
+                <div onclick="changeCity('Weather Station')" style="cursor: pointer;" id="WeatherStationCard">
+                    <img src="assets/img/Lafayette.jpg">
                 </div>
                 <!-- Bottom section (caption) -->
                 <div>
-                    <p class="ws-city-caption">Lafayette, IN</p>
+                    <!-- Hacky way to change data via selenium -->
+                    <p class="ws-city-caption">L<a id="ShowWindSpeed" onclick="changeSensor('wind_speed')" class="kiosk-interact">a</a
+                        ><a id="ShowWindGust" onclick="changeSensor('wind_gust')" class="kiosk-interact">f</a
+                        ><a id="ShowRainfall" onclick="changeSensor('rainfall')" class="kiosk-interact">a</a
+                        ><a id="ShowHumidity" onclick="changeSensor('humidity')" class="kiosk-interact">y</a
+                        ><a id="ShowTemperature" onclick="changeSensor('temperature')" class="kiosk-interact">e</a
+                        ><a id="ShowPressure" onclick="changeSensor('pressure')" class="kiosk-interact">t</a
+                        >te, IN</p>
                 </div>
             </div>
 
@@ -47,8 +57,8 @@
             <!-- Second card -->
             <div class="ws-city-card">
                 <!-- Top section (Image) -->
-                <div>
-                    <img src="assets/img/Sacramento.jpg" alt="Missing Image">
+                <div onclick="changeCity('Sacramento')" style="cursor: pointer;" id="SacramentoCard">
+                    <img src="assets/img/Sacramento.jpg">
                 </div>
                 <!-- Bottom section (caption) -->
                 <div>
@@ -61,8 +71,8 @@
             <!-- Third card -->
             <div class="ws-city-card">
                 <!-- Top section (Image) -->
-                <div>
-                    <img src="assets/img/Tampa.jpg" alt="Missing Image">
+                <div onclick="changeCity('Tampa')" style="cursor: pointer;" id="TampaCard">
+                    <img src="assets/img/Tampa.jpg">
                 </div>
                 <!-- Bottom section (caption) -->
                 <div>
@@ -75,8 +85,8 @@
             <!-- Fourth card -->
             <div class="ws-city-card">
                 <!-- Top section (Image) -->
-                <div>
-                    <img src="assets/img/Washington.jpg" alt="Missing Image">
+                <div onclick="changeCity('Washington')" style="cursor: pointer;" id="WashingtonCard">
+                    <img src="assets/img/Washington.jpg">
                 </div>
                 <!-- Bottom section (caption) -->
                 <div>
@@ -94,18 +104,18 @@
                         <!-- Title div -->
                         <div class="ws-title">
                             <span uk-icon="icon: bookmark" class="ws-title"></span>
-                            <p class="ws-title" style="padding-left:5px">Current Temperature</p>
+                            <p class="ws-title" style="padding-left:5px" id="current_title">Current Temperature</p>
                         </div>
 
-                        <!-- TODO: Necessary for elements to have id tags? -->
-                        <p class="ws-large-text" id="current_temp">{{current_temperature}}</p>
-                        <p class="ws-sub-text" id="temp_change">{{temperature_change}}</p>
+
+                        <p class="ws-large-text" id="current_data"></p>
+                        <p class="ws-sub-text" id="data_description"></p>
                     </div>
                 </div>
                 <!-- Start second card -->
                 <div class="uk-width-2-3">
                     <div class="ws-top-card">
-                        <canvas id="tempChart" width="900" height="300"></canvas>
+                        <canvas id="sevenDayChart" width="900" height="300"></canvas>
                     </div>
                 </div>
             </div>
@@ -114,8 +124,7 @@
             <div class="uk-text-center ws-middle-card" uk-grid>
                 <div class="uk-width-expand">
                     <div class="">
-                        <input id="day1" value="20171220"/>
-                        <button onclick="pullData()">PULL DATA</button>
+                        <canvas id="thirtyDayChart" width="1420" height="280"></canvas>
                     </div>
                 </div>
             </div>

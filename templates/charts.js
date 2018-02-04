@@ -1,36 +1,83 @@
 
-// Currently imports Chart.js from Cloudflare
-
-function graphChart(tempValues) {
-    chartData = myChart.data.datasets;
-    chartData.push({});
-    chartData[numberOfDataPoints].data        = tempValues;
-    chartData[numberOfDataPoints].label       = 'Day ' + numberOfDataPoints;
-    chartData[numberOfDataPoints].borderColor = '#' + Math.random().toString(16).slice(2, 8).toUpperCase().slice(-6);
-    chartData[numberOfDataPoints].fill        = false;
-    myChart.update();
+function addSevenDaysPoint(xVal, yVal) {
+    chartData = sevenDays.data.datasets[0];
+    chartData.data.push({x: xVal, y: yVal});
+    sevenDays.update();
 }
 
-function formattedLabels() {
-    var tab = [];
-    for (i = 0; i < 25; i++) {
-        tab[i] = i;
-    }
-    return tab;
+function addThirtyDaysPoint(xVal, yVal) {
+    chartData = thirtyDays.data.datasets[0];
+    chartData.data.push({x: xVal, y: yVal});
+    thirtyDays.update();
+}
+
+function rmDataPoint() {
+    sevenDays.data.datasets[0].data.shift();
+    sevenDays.update();
+}
+
+function clearGraph() {
+    sevenDays.data.datasets[0].data = [];
+    thirtyDays.data.datasets[0].data = [];
+    sevenDays.update();
+    thirtyDays.update();
 }
 
 // Render chart
-var ctx = document.getElementById('tempChart').getContext('2d');
-var myChart = new Chart(ctx, {
+var sevenDays = new Chart(document.getElementById('sevenDayChart').getContext('2d'), {
     type: 'line',
     data: {
-        labels: formattedLabels(),
-        datasets: []
-    },
+		datasets: [{
+			fill: false,
+			data: [],
+		}]
+	},
     options: {
         title: {
             display: true,
-            text: 'Day History'
+            text: '7 Day History'
+        },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    displayFormats: {
+                        day: 'MMM D'
+                    }
+                }
+            }]
+        },
+        legend: {
+            display: false
+        }
+    }
+});
+
+var thirtyDays = new Chart(document.getElementById('thirtyDayChart').getContext('2d'), {
+    type: 'line',
+    data: {
+		datasets: [{
+			fill: false,
+			data: [],
+		}]
+	},
+    options: {
+        title: {
+            display: true,
+            text: '30 Day History'
+        },
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    displayFormats: {
+                        day: 'MMM D'
+                    }
+                }
+            }]
+        },
+        legend: {
+            display: false
         }
     }
 });

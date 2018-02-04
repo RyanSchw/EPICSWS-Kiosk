@@ -1,0 +1,18 @@
+{% extends index.html %}
+
+{% block pagecontent %}
+
+    <div class="container">
+        <h2>Conditions</h2>
+
+        <ul class="list-group">
+            {% for k, v in conditions.items %}
+                <li class="list-group-item">
+                    {{k}}
+                    {{v.precip}}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

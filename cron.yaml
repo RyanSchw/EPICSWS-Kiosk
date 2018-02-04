@@ -1,0 +1,18 @@
+cron:
+
+- description: "Submit to GLOBE"
+  url: /request/submitGLOBE
+  timezone: America/New_York
+  schedule: every 24 hours
+
+- description: "Verify WU Data"
+  url: /request/verifywu
+  timezone: America/New_York
+  schedule: every 1 hours
+  # Manually adjust schedule based on the number of requests limit
+  # Schedule should also be off timing of the 15 minute updates
+
+- description: "Update Weather Underground"
+  url: /request/updatewu
+  timezone: America/New_York
+  schedule: every 15 minutes

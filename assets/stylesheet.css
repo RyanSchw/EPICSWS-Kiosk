@@ -7,18 +7,6 @@ body {
     overflow: hidden;
 }
 
-img {
-    justify-content: center !important;
-}
-
-.mdl-grid.center-items {
-    justify-content: center;
-}
-
-.center-text {
-    text-align: center;
-}
-
 .cityContainer {
     float: left;
     height: 100%;
@@ -35,4 +23,8 @@ img {
 
 .grid-spacing {
     padding-left: 40px !important;
+}
+
+.kiosk-interact {
+    color: #666;
 }
