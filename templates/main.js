@@ -76,7 +76,11 @@ function changePage() {
         var lastTime = data[data.length - 1][sensor];
         document.getElementById('current_data').innerHTML = lastTime + sup[sensor];
         var prevTime = data[data.length - 2][sensor];
-        document.getElementById('data_description').innerHTML = "%.2f" % lastTime / prevTime + "% change in the past 15 minutes."
+        if (lastTime - prevTime < 0) {
+            document.getElementById('data_description').innerHTML = (((lastTime - prevTime) / (prevTime || 1) * 100).toFixed(5)).toString().substring(0, 5) + "% change in the past 15 minutes."
+        } else {
+            document.getElementById('data_description').innerHTML = (((lastTime - prevTime) / (prevTime || 1) * 100).toFixed(5)).toString().substring(0, 4) + "% change in the past 15 minutes."
+        }
     }
 }
 

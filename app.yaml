@@ -17,7 +17,7 @@ handlers:
 
 - url: /assets
   static_dir: assets
-  expiration: '30d'
+  # expiration: '30d'
 
 - url: /lib
   static_dir: lib

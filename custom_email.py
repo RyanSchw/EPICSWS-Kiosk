@@ -6,6 +6,7 @@ from datetime import datetime
 # Sender can be XXXX@kiosk-application.appspotmail.com or any verified person (selected in browser)
 
 
+# Sends EPICS mentors an email telling them that the weather station needs servicing
 class EmailRequest:
     timeSinceLastCall = datetime.now()
     dailyCalls = 0
@@ -34,7 +35,7 @@ class EmailRequest:
     def serviceRequest(errorMsg):
         message = mail.EmailMessage(sender = keys.SERVICE_EMAIL,
                                     subject = "AUTOMATED EMAIL: Weather Station Service Request",
-                                    body = "Attention: This is an automated email sent from. We have detected an error (listed below) that requires your attention.\n\n" + errorMsg)
+                                    body = "Attention: This is an automated email sent from kiosk-application.appspot.com. We have detected an error (listed below) that requires your attention.\n\n" + errorMsg)
 
         for recipient in keys.SITE_ADMINS:
             message.to = recipient
@@ -53,12 +54,12 @@ class EmailRequest:
     def unauthorizedAccess(ip):
         message = mail.EmailMessage(sender = keys.SERVICE_EMAIL,
                                     subject = "AUTOMATED EMAIL (ACTION REQUIRED): Weather Station Unauthorized Access",
-                                    body = "Attention: This is an automated email sent from We have detected an attempt to submit data to /request/submitws. More info is listed below\n\nIP:" + ip)
+                                    body = "Attention: This is an automated email sent from kiosk-application.appspot.com. We have detected an attempt to submit data to /request/submitws. More info is listed below\n\nIP:" + ip)
 
         # CHECK AGAINST QUOTA
-        message.to = ""
+        message.to = "Person 1 <person@epics.purdue.edu>"
         if canMakeCall():
             message.send()
-        message.to = ""
+        message.to = "Person 2 <person@epics.purdue.edu"
         if canMakeCall():
             message.send()

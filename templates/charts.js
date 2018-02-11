@@ -29,21 +29,49 @@ var sevenDays = new Chart(document.getElementById('sevenDayChart').getContext('2
     data: {
 		datasets: [{
 			fill: false,
+            backgroundColor: 'rgba(255, 255, 255, 1)',
+            borderColor: 'rgba(255, 255, 255, 1)',
 			data: [],
 		}]
 	},
     options: {
         title: {
             display: true,
-            text: '7 Day History'
+            text: '7 Day History',
+            fontColor: 'rgba(255, 255, 255, .85)',
+            fontSize: 24,
+            padding: 16
         },
         scales: {
             xAxes: [{
                 type: 'time',
+                distribution: 'linear',
                 time: {
+                    unit: 'hour',
                     displayFormats: {
-                        day: 'MMM D'
+                        // Formatting: http://momentjs.com/docs/#/displaying/format/
+                        hour: 'M/D, hh:mm A'
                     }
+                },
+                ticks: {
+                    fontColor: 'rgba(255, 255, 255, .85)',
+                    fontSize: 18
+                },
+                gridLines: {
+                    display: false
+                }
+            }],
+            yAxes: [{
+                gridLines: {
+                    color: 'rgba(255, 255, 255, .85)',
+                    zeroLineColor: 'rgba(255, 255, 255, .85)',
+                    drawTicks: false,
+                    lineWidth: 2
+                },
+                ticks: {
+                    fontColor: 'rgba(255, 255, 255, .85)',
+                    padding: 8,
+                    fontSize: 18
                 }
             }]
         },
@@ -58,21 +86,49 @@ var thirtyDays = new Chart(document.getElementById('thirtyDayChart').getContext(
     data: {
 		datasets: [{
 			fill: false,
+            backgroundColor: 'rgba(255, 255, 255, 1)',
+            borderColor: 'rgba(255, 255, 255, 1)',
 			data: [],
 		}]
 	},
     options: {
         title: {
             display: true,
-            text: '30 Day History'
+            text: '30 Day History',
+            fontColor: 'rgba(255, 255, 255, 1)',
+            fontSize: 24,
+            padding: 16
         },
         scales: {
             xAxes: [{
                 type: 'time',
+                distribution: 'linear',
                 time: {
+                    unit: 'hour',
                     displayFormats: {
-                        day: 'MMM D'
+                        // Formatting: http://momentjs.com/docs/#/displaying/format/
+                        hour: 'M/D, hh:mm A'
                     }
+                },
+                ticks: {
+                    fontColor: 'rgba(255, 255, 255, 1)',
+                    fontSize: 18
+                },
+                gridLines: {
+                    display: false
+                }
+            }],
+            yAxes: [{
+                gridLines: {
+                    color: 'rgba(255, 255, 255, 1)',
+                    zeroLineColor: 'rgba(255, 255, 255, 1)',
+                    drawTicks: false,
+                    lineWidth: 2
+                },
+                ticks: {
+                    fontColor: 'rgba(255, 255, 255, 1)',
+                    padding: 8,
+                    fontSize: 18
                 }
             }]
         },

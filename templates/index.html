@@ -37,7 +37,7 @@
             <div class="ws-city-card">
                 <!-- Top section (Image) -->
                 <div onclick="changeCity('Weather Station')" style="cursor: pointer;" id="WeatherStationCard">
-                    <img src="assets/img/Lafayette.jpg">
+                    <img src="assets/img/Lafayette.png" />
                 </div>
                 <!-- Bottom section (caption) -->
                 <div>
@@ -58,7 +58,7 @@
             <div class="ws-city-card">
                 <!-- Top section (Image) -->
                 <div onclick="changeCity('Sacramento')" style="cursor: pointer;" id="SacramentoCard">
-                    <img src="assets/img/Sacramento.jpg">
+                    <img src="assets/img/Sacramento.png" />
                 </div>
                 <!-- Bottom section (caption) -->
                 <div>
@@ -72,7 +72,7 @@
             <div class="ws-city-card">
                 <!-- Top section (Image) -->
                 <div onclick="changeCity('Tampa')" style="cursor: pointer;" id="TampaCard">
-                    <img src="assets/img/Tampa.jpg">
+                    <img src="assets/img/Tampa.png" />
                 </div>
                 <!-- Bottom section (caption) -->
                 <div>
@@ -86,7 +86,7 @@
             <div class="ws-city-card">
                 <!-- Top section (Image) -->
                 <div onclick="changeCity('Washington')" style="cursor: pointer;" id="WashingtonCard">
-                    <img src="assets/img/Washington.jpg">
+                    <img src="assets/img/Washington.png" />
                 </div>
                 <!-- Bottom section (caption) -->
                 <div>
@@ -103,7 +103,8 @@
                     <div class="ws-top-card">
                         <!-- Title div -->
                         <div class="ws-title">
-                            <span uk-icon="icon: bookmark" class="ws-title"></span>
+                            <!-- TODO: Temperature icon? -->
+                            <!-- <span uk-icon="icon: bookmark" class="ws-title"></span> -->
                             <p class="ws-title" style="padding-left:5px" id="current_title">Current Temperature</p>
                         </div>
 
@@ -130,18 +131,30 @@
             </div>
             <!-- End middle row -->
             <!-- Start bottom row -->
-            <div class="uk-text-center ws-bottom-card" uk-grid>
+            <div class="uk-text-left" uk-grid>
                 <div class="uk-width-1-4">
-                    <div class="uk-card uk-card-default uk-card-body">1-4</div>
+                    <div class="ws-title">
+                        <p class="ws-title">What Is Measured</p>
+                    </div>
+                    <p class="ws-paragraph-text">Temperature is a degree of hotness or coldness the can be measured using a thermometer. It's also a measure of how fast the atoms and molecules of a substance are moving. Temperature is measured in degrees on the Fahrenheit, Celsius, and Kelvin scales.</p>
                 </div>
                 <div class="uk-width-1-4">
-                    <div class="uk-card uk-card-default uk-card-body">1-4</div>
+                    <div class="ws-title">
+                        <p class="ws-title">Sensor Used</p>
+                    </div>
+                    <p class="ws-paragraph-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa <strong>strong</strong>. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
                 </div>
                 <div class="uk-width-1-4">
-                    <div class="uk-card uk-card-default uk-card-body">1-4</div>
+                    <div class="ws-title">
+                        <p class="ws-title">How Sensor Works</p>
+                    </div>
+                    <p class="ws-paragraph-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa <strong>strong</strong>. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
                 </div>
                 <div class="uk-width-1-4">
-                    <div class="uk-card uk-card-default uk-card-body">1-4</div>
+                    <div class="ws-title">
+                        <p class="ws-title">On Weather Station</p>
+                    </div>
+                    <img class="sensor-image" src="assets/img/ws-temp-sensor.jpg"/>
                 </div>
             </div>
             <!-- End bottom row -->

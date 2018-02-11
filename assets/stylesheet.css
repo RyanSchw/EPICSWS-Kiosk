@@ -2,9 +2,14 @@
     display: none;
 }
 
+/* COLORING STUFF: https://imgur.com/a/Ao5OZ, https://material.io/color/#!/?view.left=1&view.right=1&primary.color=4a8db5&secondary.color=5d99be&primary.text.color=ffffff */
 body {
     font-family: 'Roboto', serif;
     overflow: hidden;
+    /* background-image: url('https://media.giphy.com/media/l4pT2QJzGPXlKyqty/giphy.gif'); */
+    background-image: url('https://media.giphy.com/media/OQ8itcDNz7ugg/giphy.gif');
+    background-size: cover;
+    color: rgba(255, 255, 255, .85);
 }
 
 .cityContainer {
@@ -26,5 +31,5 @@ body {
 }
 
 .kiosk-interact {
-    color: #666;
+    color: rgba(255, 255, 255, 1);
 }

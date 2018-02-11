@@ -41,6 +41,10 @@ p.ws-title {
     font-size: 24px;
 }
 
+.ws-paragraph-text {
+    font-size: 18px;
+}
+
 .ws-city-caption {
     font-size: 24px;
     text-align: right;
@@ -48,4 +52,9 @@ p.ws-title {
 
 .ws-city-breaker {
     height: 30px;
+}
+
+.sensor-image {
+    padding: 0 0 0 50px;
+    width: 240px;
 }
