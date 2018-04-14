@@ -1,23 +1,27 @@
 
 function addSevenDaysPoint(xVal, yVal) {
+    sevenDays.data.labels.push(xVal);
     chartData = sevenDays.data.datasets[0];
-    chartData.data.push({x: xVal, y: yVal});
+    chartData.data.push(yVal);
     sevenDays.update();
 }
 
 function addThirtyDaysPoint(xVal, yVal) {
+    thirtyDays.data.labels.push(xVal);
     chartData = thirtyDays.data.datasets[0];
-    chartData.data.push({x: xVal, y: yVal});
+    chartData.data.push(yVal);
     thirtyDays.update();
 }
 
 function rmDataPoint() {
-    sevenDays.data.datasets[0].data.shift();
-    sevenDays.update();
+    // sevenDays.data.datasets[0].data.shift();
+    // sevenDays.update();
 }
 
 function clearGraph() {
+    sevenDays.data.labels = [];
     sevenDays.data.datasets[0].data = [];
+    thirtyDays.data.labels = [];
     thirtyDays.data.datasets[0].data = [];
     sevenDays.update();
     thirtyDays.update();
@@ -27,6 +31,7 @@ function clearGraph() {
 var sevenDays = new Chart(document.getElementById('sevenDayChart').getContext('2d'), {
     type: 'line',
     data: {
+        labels: [],
 		datasets: [{
 			fill: false,
             backgroundColor: 'rgba(255, 255, 255, 1)',
@@ -44,22 +49,44 @@ var sevenDays = new Chart(document.getElementById('sevenDayChart').getContext('2
         },
         scales: {
             xAxes: [{
+                // id: 'xAxis1',
                 type: 'time',
-                distribution: 'linear',
+                distribution: 'series',
                 time: {
                     unit: 'hour',
+                    // unitStepSize: 0.5,
+                    round: 'hour',
                     displayFormats: {
                         // Formatting: http://momentjs.com/docs/#/displaying/format/
-                        hour: 'M/D, hh:mm A'
+                        // Major axis day, minor axis hour
+                        hour: 'h:mm A'
                     }
                 },
                 ticks: {
                     fontColor: 'rgba(255, 255, 255, .85)',
-                    fontSize: 18
+                    fontSize: 18,
+                    source: 'auto'
+                    // callback: function(label) {
+                    //     // console.log(label);
+                    //     return '$$' + label;
+                    // }
                 },
                 gridLines: {
                     display: false
                 }
+            // }, {
+            //     id: 'xAxis2',
+            //     type: 'category',
+            //     ticks: {
+            //         callback: function(label) {
+            //             return label.format('MMM Do');
+            //         },
+            //         fontColor: 'rgba(255, 255, 255, .85)',
+            //         fontSize: 18
+            //     },
+            //     gridLines: {
+            //         drawOnChartArea: false
+            //     }
             }],
             yAxes: [{
                 gridLines: {
@@ -101,23 +128,26 @@ var thirtyDays = new Chart(document.getElementById('thirtyDayChart').getContext(
         },
         scales: {
             xAxes: [{
-                type: 'time',
-                distribution: 'linear',
-                time: {
-                    unit: 'hour',
-                    displayFormats: {
-                        // Formatting: http://momentjs.com/docs/#/displaying/format/
-                        hour: 'M/D, hh:mm A'
+                    type: 'time',
+                    distribution: 'linear',
+                    bounds: 'data',
+                    time: {
+                        unit: 'hour',
+                        stepSize: 2,
+                        round: 'hour',
+                        displayFormats: {
+                            hour: 'MMM D'
+                        }
+                    },
+                    ticks: {
+                        fontColor: 'rgba(255, 255, 255, 1)',
+                        fontSize: 18,
+                        source: 'auto'
+                    },
+                    gridLines: {
+                        display: false
                     }
-                },
-                ticks: {
-                    fontColor: 'rgba(255, 255, 255, 1)',
-                    fontSize: 18
-                },
-                gridLines: {
-                    display: false
-                }
-            }],
+                }],
             yAxes: [{
                 gridLines: {
                     color: 'rgba(255, 255, 255, 1)',

@@ -7,7 +7,7 @@ body {
     font-family: 'Roboto', serif;
     overflow: hidden;
     /* background-image: url('https://media.giphy.com/media/l4pT2QJzGPXlKyqty/giphy.gif'); */
-    background-image: url('https://media.giphy.com/media/OQ8itcDNz7ugg/giphy.gif');
+    background-image: url('https://i.imgur.com/RXdOonZ.jpg');
     background-size: cover;
     color: rgba(255, 255, 255, .85);
 }
@@ -32,4 +32,41 @@ body {
 
 .kiosk-interact {
     color: rgba(255, 255, 255, 1);
+}
+
+.kiosk-interact:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+.kiosk-interact:focus {
+    color: rgba(255, 255, 255, 1);
+}
+
+.uk-modal-dialog {
+    color: #666;
+}
+
+.active-city {
+    padding: 10px 10px 0px 10px;
+    border: 5px 5px 5px 5px;
+    border-color: #fff;
+    border-radius: 10px;
+    border-style: solid;
+}
+
+.active-sensor {
+    border: 5px 5px 5px 5px;
+    border-color: #fff;
+    border-radius: 10px;
+    border-style: solid;
+    padding: 5px 5px 5px 5px;
+    width: 300px;
+    display: inline;
+}
+
+.nonactive-sensor {
+    border: 0px 0px 0px 0px;
+    padding: 5px 5px 5px 5px;
+    width: 300px;
+    display: inline;
 }

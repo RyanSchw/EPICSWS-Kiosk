@@ -3,6 +3,11 @@ runtime: python27
 threadsafe: yes
 api_version: 1
 
+# MUST BE IN FORMAT MAJOR.MINOR
+# NO LONGER UNDER DEVELOPMENT ONCE MAJOR >= 1
+env_variables:
+  WEBSITE_VERSION: '0.1'
+
 handlers:
 
 - url: /favicon\.ico
@@ -22,9 +27,6 @@ handlers:
 - url: /lib
   static_dir: lib
   expiration: '30d'
-
-- url: /request/submitws
-  script: main.application
 
 - url: /
   script: main.application

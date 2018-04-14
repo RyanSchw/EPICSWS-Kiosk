@@ -1,10 +1,8 @@
-<!-- Red: rgb(190, 15, 15); Blue: rgb(30, 100, 240); Green: rgb(15, 157, 88) -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
-    <title>EPICS Weather Station</title>
+    <title>EPICS Weather Station</title> <!-- sets the title for the screen  -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- Import style sheet and custom card css files -->
@@ -29,12 +27,12 @@
 
 </head>
 
-<body>
+<body id="fs">
     <div class="uk-grid-divider" uk-grid style="padding:30px;">
         <!-- City menu -->
         <div class="cityContainer uk-width-1-5">
             <!-- First card -->
-            <div class="ws-city-card">
+            <div id="Weather Station" class="ws-city-card active-city">
                 <!-- Top section (Image) -->
                 <div onclick="changeCity('Weather Station')" style="cursor: pointer;" id="WeatherStationCard">
                     <img src="assets/img/Lafayette.png" />
@@ -48,14 +46,15 @@
                         ><a id="ShowHumidity" onclick="changeSensor('humidity')" class="kiosk-interact">y</a
                         ><a id="ShowTemperature" onclick="changeSensor('temperature')" class="kiosk-interact">e</a
                         ><a id="ShowPressure" onclick="changeSensor('pressure')" class="kiosk-interact">t</a
-                        >te, IN</p>
+                        ><a id="enter-exit-fs" onclick="enterFullscreen()" class="kiosk-interact">t</a
+                        >e, IN</p>
                 </div>
             </div>
 
             <div class="ws-city-breaker"></div>
 
             <!-- Second card -->
-            <div class="ws-city-card">
+            <div id="Sacramento" class="ws-city-card">
                 <!-- Top section (Image) -->
                 <div onclick="changeCity('Sacramento')" style="cursor: pointer;" id="SacramentoCard">
                     <img src="assets/img/Sacramento.png" />
@@ -69,7 +68,7 @@
             <div class="ws-city-breaker"></div>
 
             <!-- Third card -->
-            <div class="ws-city-card">
+            <div id="Tampa" class="ws-city-card">
                 <!-- Top section (Image) -->
                 <div onclick="changeCity('Tampa')" style="cursor: pointer;" id="TampaCard">
                     <img src="assets/img/Tampa.png" />
@@ -83,7 +82,7 @@
             <div class="ws-city-breaker"></div>
 
             <!-- Fourth card -->
-            <div class="ws-city-card">
+            <div id="Washington" class="ws-city-card">
                 <!-- Top section (Image) -->
                 <div onclick="changeCity('Washington')" style="cursor: pointer;" id="WashingtonCard">
                     <img src="assets/img/Washington.png" />
@@ -136,19 +135,19 @@
                     <div class="ws-title">
                         <p class="ws-title">What Is Measured</p>
                     </div>
-                    <p class="ws-paragraph-text">Temperature is a degree of hotness or coldness the can be measured using a thermometer. It's also a measure of how fast the atoms and molecules of a substance are moving. Temperature is measured in degrees on the Fahrenheit, Celsius, and Kelvin scales.</p>
+                    <p id="Measured" class="ws-paragraph-text">Temperature is a degree of hotness or coldness the can be measured using a thermometer. It's also a measure of how fast the atoms and molecules of a substance are moving. Temperature is measured in degrees on the Fahrenheit, Celsius, and Kelvin scales.</p>
                 </div>
                 <div class="uk-width-1-4">
                     <div class="ws-title">
                         <p class="ws-title">Sensor Used</p>
                     </div>
-                    <p class="ws-paragraph-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa <strong>strong</strong>. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                    <p id="Sensor" class="ws-paragraph-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa <strong>strong</strong>. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
                 </div>
                 <div class="uk-width-1-4">
                     <div class="ws-title">
                         <p class="ws-title">How Sensor Works</p>
                     </div>
-                    <p class="ws-paragraph-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa <strong>strong</strong>. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                    <p id="Works" class="ws-paragraph-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa <strong>strong</strong>. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
                 </div>
                 <div class="uk-width-1-4">
                     <div class="ws-title">
@@ -158,6 +157,64 @@
                 </div>
             </div>
             <!-- End bottom row -->
+            <div style="margin: 20px 0px 0px 150px; font-size: 24px;">
+                <p id="temperature" class="active-sensor">TEMPERATURE</p
+                ><p id="rainfall" class="nonactive-sensor">RAINFALL</p>
+                <p id="wind_speed" class="nonactive-sensor">WIND SPEED</p>
+                <p id="humidity" class="nonactive-sensor">HUMIDITY</p>
+                <p id="pressure" class="nonactive-sensor">PRESSURE</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-group-1" uk-modal>
+        <div class="uk-modal-dialog">
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">Question 1</h2>
+            </div>
+            <div class="uk-modal-body">
+                <p>On a scale of 1 (never) to 5 (multiple times per day), how often do you check the weather?</p>
+                <img src="assets/img/Survey.png" />
+                <p id="rating1" style="font-size: 30px; text-align: center;">3</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-group-2" uk-modal>
+        <div class="uk-modal-dialog">
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">Question 2</h2>
+            </div>
+            <div class="uk-modal-body">
+                <p>How difficult was the navigation of this website on a scale of 1 (no difficulty) to 5 (high difficulty)?</p>
+                <img src="assets/img/Survey.png" />
+                <p id="rating2" style="font-size: 30px; text-align: center;">3</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-group-3" uk-modal>
+        <div class="uk-modal-dialog">
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">Question 3</h2>
+            </div>
+            <div class="uk-modal-body">
+                <p>How intuitive (easy to use / understand) was this button layout on a scale of 1 (not intuitive, difficult to understand) to 5 (highly intuitive, very easy to understand)?</p>
+                <img src="assets/img/Survey.png" />
+                <p id="rating3" style="font-size: 30px; text-align: center;">3</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-group-4" uk-modal>
+        <div class="uk-modal-dialog">
+            <div class="uk-modal-header">
+                <h2 class="uk-modal-title">Thank you!</h2>
+            </div>
+            <div class="uk-modal-body">
+                <p>You have reached the end of the survey. Thank you for your participation!</p>
+                <p>Press any button to continue.</p>
+            </div>
         </div>
     </div>
 
